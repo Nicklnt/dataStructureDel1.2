@@ -53,6 +53,8 @@ class Deck:
         for suite in ['Hearts', 'Diamonds', 'Spades', 'Clubs']:
             for rank in range(1, 14):
                 self.cards.append(Card(rank, suite))
+        for i in range (0,3):
+            self.cards.append(Card(0,"X")) #add 3 jokers
 
     def __str__(self):
         return str(self.cards)
@@ -67,6 +69,7 @@ class Deck:
         random.shuffle(self.cards)
 
     @staticmethod
+    
     def insert(card_list, card):
         """ Inserts a 'card' in the correct spot in the deck 'card_list' """
         control = False
@@ -85,17 +88,6 @@ class Deck:
                 if control== False:
                     card_list.append(card)
         
-        
-
-                    
-                    
-                        
-                
-    
-
-        ###################
-        # Your code here! #
-        ###################
 
         return card_list
 
@@ -122,6 +114,31 @@ class Deck:
 
     def python_sort(self):
         self.cards.sort()
+    def remove_jokers(self):
+        i = 0
+        
+        while i  < len(self.cards):
+            if self.cards[i].rank == 0:
+                self.cards.pop(i)
+                i=i-1
+            else:
+                i += 1
+
+    def short_by_suite(self):
+        
+        for i in range (0, len(self.cards)):
+            for j in range (i+1 , len(self.cards)):
+                if self.cards[i].suite == self.cards[j].suite:
+                    self.cards[j],self.cards[i+1] =self.cards[i+1],self.cards[j]
+    
+    def pyck_by_ramdon(self):
+        number = random.randint(0,len(self.cards))
+        print ("pyck_by_ramdon:",self.cards.pop(number))
+
+                    
+
+
+    
 
 
 if __name__ == '__main__':
@@ -136,3 +153,12 @@ if __name__ == '__main__':
     print('Shuffled deck:', deck)
     deck.python_sort()
     print('Python Sorted deck:', deck)
+    
+    deck.remove_jokers()
+    print('Remove_joker:', deck)
+    deck.short_by_suite()
+    print("short_by_suite:",deck)
+    deck.pyck_by_ramdon()
+    
+    
+
